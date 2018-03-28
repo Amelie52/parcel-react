@@ -1,0 +1,11 @@
+[ignore]
+; ignore module source
+.*/node_modules/*
+
+[lints]
+all=warn
+
+[options]
+emoji=true
+module.file_ext=.scss
+module.name_mapper.extension='scss' -> 'empty/object'
