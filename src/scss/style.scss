@@ -1,4 +1,76 @@
+html {
+  font-size: 62.5%;
+}
+
 body {
   color: #24292e;
+  background-color: #000;
   margin: 0;
+  font-size: 1.4em;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.flex-1 {
+  flex: 1 0 auto;
+}
+
+.title {
+  position: absolute;
+  top: 30px;
+  width: 100%;
+  color: #222222;
+  text-align: center;
+  font-size: 5rem;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.sphere__container {
+  display: flex;
+  height: 100vh;
+
+  .sphere__edit {
+    width: 50%;
+    display: flex;
+
+    .form {
+      margin: auto;
+      width: 50%;
+
+      label {
+        margin-bottom: 10px;
+        color: #F9F9F9;
+        font-family: 'Quicksand', sans-serif;
+      }
+
+      input {
+        width: 100%;
+        padding: 5px;
+        background-color: #000;
+        border: none;
+        border-bottom: 1px solid #222222;
+        color: #fff;
+        font-size: 2rem;
+        font-family: 'Quicksand', sans-serif;
+
+        &[type="color"] {
+          border: none;
+          padding: 0;
+          height: 10px;
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+
+  .sphere__view {
+    width: 50%;
+    display: flex;
+
+    > div {
+      margin: auto;
+    }
+  }
 }
