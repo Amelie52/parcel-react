@@ -13,8 +13,10 @@ export default class SphereContainer extends React.Component<Props, State> {
     };
 
     setColorState = () => {
+        const color = document.getElementById('sphere-color-value').value;
+
         this.setState({
-            colorValue: "#ffffff"
+            colorValue: color
         });
     };
 
@@ -33,6 +35,7 @@ export default class SphereContainer extends React.Component<Props, State> {
                     <Sphere
                         rotationX={0.01}
                         rotationY={0.01}
+                        sphereColor={colorValue}
                     />
                 </div>
             </div>

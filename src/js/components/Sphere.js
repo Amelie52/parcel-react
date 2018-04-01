@@ -4,7 +4,8 @@ import * as THREE from 'three';
 
 type Props = {
     rotationX: number,
-    rotationY: number
+    rotationY: number,
+    sphereColor: string
 }
 
 export default class Sphere extends React.Component<Props> {
@@ -17,6 +18,8 @@ export default class Sphere extends React.Component<Props> {
     }
 
     componentDidMount() {
+        const { sphereColor } = this.props;
+
         const width = this.mount.clientWidth;
         const height = this.mount.clientHeight;
 
@@ -40,7 +43,7 @@ export default class Sphere extends React.Component<Props> {
 
         // create sphere
         const geometry = new THREE.SphereBufferGeometry( 0.5, 20, 20);
-        const material = new THREE.MeshPhongMaterial( { color: '#61DAFB'} );
+        const material = new THREE.MeshPhongMaterial( { color: `${this.props.sphereColor}` } );
         const sphere = new THREE.Mesh(geometry, material);
         sphere.position.x = -60;
         sphere.position.y = -0.3;
@@ -50,7 +53,7 @@ export default class Sphere extends React.Component<Props> {
 
         // create round
         const geometryCircle = new THREE.CircleBufferGeometry(5, 40);
-        const materialCircle = new THREE.MeshPhongMaterial( { color: '#61DAFB', wireframe: true} );
+        const materialCircle = new THREE.MeshPhongMaterial( { color: `${sphereColor}`, wireframe: true} );
         const round = new THREE.Mesh(geometryCircle, materialCircle);
         round.position.x = -60;
         round.position.y = -0.2;
@@ -60,7 +63,7 @@ export default class Sphere extends React.Component<Props> {
 
         // create round2
         const geometryCircle2 = new THREE.CircleBufferGeometry( 5, 40);
-        const materialCircle2 = new THREE.MeshPhongMaterial( { color: '#61DAFB', wireframe: true} );
+        const materialCircle2 = new THREE.MeshPhongMaterial( { color: `${sphereColor}`, wireframe: true} );
         const round2 = new THREE.Mesh(geometryCircle2, materialCircle2);
         round2.position.x = -60;
         round2.position.y = 0;
@@ -71,7 +74,7 @@ export default class Sphere extends React.Component<Props> {
 
         // create round3
         const geometryCircle3 = new THREE.CircleBufferGeometry( 5, 40);
-        const materialCircle3 = new THREE.MeshPhongMaterial( { color: '#61DAFB', wireframe: true} );
+        const materialCircle3 = new THREE.MeshPhongMaterial( { color: `${sphereColor}`, wireframe: true} );
         const round3 = new THREE.Mesh(geometryCircle3, materialCircle3);
         round3.position.x = -60;
         round3.position.y = 0;
@@ -102,6 +105,16 @@ export default class Sphere extends React.Component<Props> {
     componentWillUnmount() {
         this.stop();
         this.mount.removeChild(this.renderer.domElement);
+    }
+
+    componentDidUpdate(){
+        let color = this.props.sphereColor
+        color = color.replace("#", "")
+
+        this.sphere.material.color.setHex( "0x"+color )
+        this.round.material.color.setHex( "0x"+color )
+        this.round2.material.color.setHex( "0x"+color )
+        this.round3.material.color.setHex( "0x"+color )
     }
 
     start() {
