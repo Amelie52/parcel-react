@@ -54,12 +54,14 @@ body {
         color: #fff;
         font-size: 2rem;
         font-family: 'Quicksand', sans-serif;
+        margin-bottom: 20px;
 
         &[type="color"] {
           border: none;
           padding: 0;
           height: 10px;
           margin-top: 5px;
+          width: 103%;
         }
       }
     }

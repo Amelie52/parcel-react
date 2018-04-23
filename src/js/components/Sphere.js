@@ -3,9 +3,10 @@ import * as React from 'react';
 import * as THREE from 'three';
 
 type Props = {
-    rotationX: number,
-    rotationY: number,
-    sphereColor: string
+    sphereColor: string,
+    xRotationValue: number,
+    yRotationValue: number,
+    zRotationValue: number,
 }
 
 export default class Sphere extends React.Component<Props> {
@@ -107,14 +108,25 @@ export default class Sphere extends React.Component<Props> {
         this.mount.removeChild(this.renderer.domElement);
     }
 
-    componentDidUpdate(){
-        let color = this.props.sphereColor
-        color = color.replace("#", "")
+    componentDidUpdate(prevProps){
+        const {
+            sphereColor,
+        } = this.props;
 
-        this.sphere.material.color.setHex( "0x"+color )
-        this.round.material.color.setHex( "0x"+color )
-        this.round2.material.color.setHex( "0x"+color )
-        this.round3.material.color.setHex( "0x"+color )
+        const color = sphereColor.replace("#", "");
+
+        this.sphere.material.color.setHex( "0x"+color );
+        this.round.material.color.setHex( "0x"+color );
+        this.round2.material.color.setHex( "0x"+color );
+        this.round3.material.color.setHex( "0x"+color );
+
+        if(
+            prevProps.xRotationValue !== this.props.xRotationValue &&
+            prevProps.yRotationValue !== this.props.yRotationValue &&
+            prevProps.zRotationValue !== this.props.zRotationValue
+        ) {
+            this.animate();
+        }
     }
 
     start() {
@@ -128,12 +140,19 @@ export default class Sphere extends React.Component<Props> {
     }
 
     animate() {
-        const { rotationX, rotationY } = this.props;
+        const {
+            xRotationValue,
+            yRotationValue,
+            zRotationValue
+        } = this.props;
 
-        this.sphere.rotation.x += rotationX;
-        this.sphere.rotation.y += rotationY;
+        this.sphere.rotation.x += 0.01;
+        this.sphere.rotation.y += 0.01;
 
-        this.round.rotation.z += 0.01;
+        this.round.rotation.x += xRotationValue;
+        this.round.rotation.y += yRotationValue;
+        this.round.rotation.z += zRotationValue;
+
         this.round2.rotation.z += 0.01;
         this.round3.rotation.z += 0.01;
 
